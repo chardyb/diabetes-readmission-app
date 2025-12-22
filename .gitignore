@@ -1,0 +1,16 @@
+#ignore virutal environment
+venv/
+.env/
+
+#ignore data files
+data/
+
+#ignore Python cache files
+__pycache__/
+*.pyc
+
+#mac system files
+.DS_Store
+
+#IDE settings
+.vscode/
