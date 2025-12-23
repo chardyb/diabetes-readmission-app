@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import joblib
 
 from sklearn.model_selection import train_test_split
@@ -73,6 +73,20 @@ def train_model():
     print(f"ROC AUC: {roc_auc_score(y_test, y_prob):.4f}")
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
+
+    #visualize confusion matrix
+    print("\nConfusion Matrix:")
+    cm = confusion_matrix(y_test, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=['No Readmission', 'Readmission'])
+
+    #plotting
+    plt.figure(figsize=(8, 6))
+    disp.plot(cmap='Blues', values_format='d')
+    plt.title("Confusion Matrix: Identifying Readmission Risk")
+
+    #save confusion matrix plot
+    plt.savefig("results/confusion_matrix.png")
+    print("Plot saved to results/confusion_matrix.png")
 
     #save model 
     joblib.dump(clf, 'data/diabetes_model.pkl')
